@@ -8,3 +8,4 @@ data/server.log
 data/*.py
 .claude/
 data/hosted/
+data/*.log
