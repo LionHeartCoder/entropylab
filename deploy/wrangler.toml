@@ -10,5 +10,5 @@ routes = [
 
 [vars]
 # Replace with the URL printed by `modal deploy modal_app.py`
-ORIGIN = "https://bryankoury--entropylab-web.modal.run"
+ORIGIN = "https://lionheartcoder--entropylab-web.modal.run"
 PREFIX = "/entropylab"

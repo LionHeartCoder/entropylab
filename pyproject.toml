@@ -26,4 +26,7 @@ build-backend = "hatchling.build"
 packages = ["src/lotto"]
 
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = [
+    "modal>=1.5.5",
+    "pytest>=8",
+]

@@ -1,0 +1,15 @@
+The web browser should have opened for you to authenticate and get an API 
+token.
+If it didn't, please copy this URL into your web browser manually:
+
+https://modal.com/token-flow/tf-TzG53I4n2Qwz6s8G3NmHef
+
+Web authentication finished successfully!
+Token is connected to the lionheartcoder workspace.
+Verifying token against https://api.modal.com,https://api.modal2.com
+Token verified successfully!
+Token written to C:\Users\Bryan/.modal.toml in profile lionheartcoder.
++- Error ---------------------------------------------------------------------+
+| 'charmap' codec can't encode character '\u2192' in position 0: character    |
+| maps to <undefined>                                                         |
++-----------------------------------------------------------------------------+
