@@ -9,3 +9,5 @@ data/*.py
 .claude/
 data/hosted/
 data/*.log
+deploy/.wrangler/
+deploy/node_modules/

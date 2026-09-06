@@ -59,7 +59,7 @@ main { padding: 16px 20px 40px; max-width: 1400px; margin: 0 auto; }
 
 /* controls */
 input, select, button { font: inherit; color: var(--text); }
-input[type=text], input:not([type]), input[type=number], select { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; }
+input[type=text], input[type=password], input:not([type]), input[type=number], select { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; }
 input[type=number] { width: 70px; }
 label { display: block; font-size: 12px; color: var(--muted); margin: 8px 0 0; }
 label input:not([type=checkbox]):not([type=radio]) { margin-top: 4px; }
