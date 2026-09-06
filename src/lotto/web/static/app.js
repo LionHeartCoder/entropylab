@@ -172,6 +172,19 @@ async function init() {
   $("#tickets").addEventListener("change", () => $("#max-shared").disabled = Number($("#tickets").value) < 2);
 
   setupMousepad();
+  // floating Generate button on phones: shows only when the real one is scrolled away on the Lab tab
+  const fab = $("#fab");
+  fab.addEventListener("click", () => { if ($("#tab-lab").classList.contains("active")) { $("#generate").click(); $("#generate").scrollIntoView({ behavior: "smooth", block: "center" }); } else if ($("#tab-tools").classList.contains("active")) { $("#tool-run").click(); $("#tool-out").scrollIntoView({ behavior: "smooth", block: "start" }); } });
+  const updateFab = () => {
+    const labOn = $("#tab-lab").classList.contains("active"), toolsOn = $("#tab-tools").classList.contains("active");
+    const btn = labOn ? $("#generate") : toolsOn ? $("#tool-run") : null;
+    if (!btn) { fab.classList.remove("show"); return; }
+    const r = btn.getBoundingClientRect(); const visible = r.bottom > 0 && r.top < innerHeight;
+    fab.classList.toggle("show", !visible && !state.busy);
+  };
+  addEventListener("scroll", updateFab, { passive: true }); addEventListener("resize", updateFab);
+  $$(".tabs button").forEach(b => b.addEventListener("click", () => setTimeout(updateFab, 50)));
+  setInterval(updateFab, 1500);
   $("#file-input").addEventListener("change", async e => {
     const f = e.target.files[0]; if (!f) { state.file = null; $("#file-info").textContent = "none"; return; }
     if (f.size > 40 * 1024 * 1024) { toast("file larger than 40 MB", true); e.target.value = ""; return; }
