@@ -59,6 +59,34 @@ Encrypt/decrypt uses AES-256-GCM with a scrypt-derived key. Tokens look like
 
 A desktop shortcut (`Entropy Lab.lnk`) points at the launcher.
 
+## Hosted edition (Modal + Cloudflare)
+
+The same code runs as a public site. Set `LOTTO_HOSTED=1` and the server switches to
+hosted mode: the visitor's browser captures camera and microphone with getUserMedia and
+sends frames and samples up, tickets are separated per visitor by an anonymous cookie,
+the server camera peek is disabled, and all URLs are relative so the app can live under a
+sub-path.
+
+Deploy to Modal (persistent volume holds the database and results cache):
+
+```
+uv tool install modal
+modal setup
+modal deploy modal_app.py
+```
+
+Then put `deploy/cloudflare-worker.js` in front of it so it appears at
+`https://www.bryankoury.com/entropylab/`: edit `ORIGIN` in `deploy/wrangler.toml` to the
+URL Modal printed, then:
+
+```
+cd deploy
+npx wrangler login
+npx wrangler deploy
+```
+
+The Worker proxies HTTP and WebSocket traffic and rewrites the owner cookie to the sub-path.
+
 ## Honest note
 
 Every draw is independent. No picking method changes your odds. The one real effect of
