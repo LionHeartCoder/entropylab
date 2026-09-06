@@ -1,9 +1,0 @@
-✓ Created objects.
-├── 🔨 Created mount C:\Users\Bryan\lottery-rng\modal_app.py
-├── 🔨 Created mount C:\Users\Bryan\lottery-rng\data\eff_large_wordlist.txt
-├── 🔨 Created mount C:\Users\Bryan\lottery-rng\src
-└── 🔨 Created web function web => 
-    https://lionheartcoder--entropylab-web.modal.run
-✓ App deployed in 2.164s! 🎉
-
-View Deployment: https://modal.com/apps/lionheartcoder/main/deployed/entropylab
