@@ -11,3 +11,5 @@ data/hosted/
 data/*.log
 deploy/.wrangler/
 deploy/node_modules/
+data/*.html
+data/*.txt.tmp
