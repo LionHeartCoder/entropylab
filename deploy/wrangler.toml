@@ -1,0 +1,14 @@
+name = "entropylab-proxy"
+main = "cloudflare-worker.js"
+compatibility_date = "2026-01-01"
+
+# Route the sub-path of your site to this worker.
+routes = [
+  { pattern = "www.bryankoury.com/entropylab*", zone_name = "bryankoury.com" },
+  { pattern = "bryankoury.com/entropylab*", zone_name = "bryankoury.com" },
+]
+
+[vars]
+# Replace with the URL printed by `modal deploy modal_app.py`
+ORIGIN = "https://bryankoury--entropylab-web.modal.run"
+PREFIX = "/entropylab"
