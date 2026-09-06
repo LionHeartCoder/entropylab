@@ -39,6 +39,11 @@ def owner_of(req) -> str:
 @app.middleware("http")
 async def _owner_cookie(request: Request, call_next):
     response = await call_next(request)
+    if request.url.path.startswith("/static/"):
+        response.headers["Cache-Control"] = ("public, max-age=31536000, immutable" if request.query_params.get("v") == ASSET_VERSION
+                                             else "no-cache")
+    elif request.url.path.startswith("/api/") or request.url.path == "/healthz":
+        response.headers["Cache-Control"] = "no-store"
     if HOSTED and not request.cookies.get(OWNER_COOKIE):
         response.set_cookie(OWNER_COOKIE, uuid.uuid4().hex, max_age=10 * 365 * 24 * 3600, samesite="lax", httponly=True)
     return response
@@ -58,9 +63,22 @@ def game_info(k: str) -> dict:
     }
 
 
+def _asset_version() -> str:
+    h = hashlib.sha256()
+    for name in ("app.js", "style.css", "index.html"):
+        h.update((STATIC / name).read_bytes())
+    return h.hexdigest()[:10]
+
+
+ASSET_VERSION = _asset_version()
+
+
 @app.get("/")
 def index():
-    return FileResponse(STATIC / "index.html")
+    html = (STATIC / "index.html").read_text(encoding="utf-8")
+    html = html.replace('static/style.css"', f'static/style.css?v={ASSET_VERSION}"').replace(
+        'static/app.js"', f'static/app.js?v={ASSET_VERSION}"')
+    return Response(html, media_type="text/html", headers={"Cache-Control": "no-cache"})
 
 
 @app.get("/api/meta")
